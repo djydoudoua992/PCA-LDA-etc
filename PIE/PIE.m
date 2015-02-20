@@ -13,7 +13,7 @@ fea1 = fea;
 
 error = [];
 dim =2000; %%check recognition rate every dim dimensions (change it appropriatly for PCA, LDA etc
-for jj = 1:3
+for jj = 1:1
     jj
 
     TrainIdx = Train(jj, :);
@@ -30,7 +30,9 @@ for jj = 1:3
 
      %U_reduc = eye(size(64*64,64*64));  %%change it to PCA, LDA, etc
      %[U_reduc,lamda]=eig(cov(fea_Train));%PCA
-     [U_reduc,lamda]=eig(cov(fea_Train));U_reduc=U_reduc*1./sqrt(lamda+0.00001);%whitened PCA
+     %[U_reduc,lamda]=eig(cov(fea_Train));U_reduc=U_reduc*1./sqrt(lamda+0.00001);%whitened PCA
+     %[U_reduc,lamda]=LDA(fea_Train,10);
+     [U_reduc, lamda] = LPP(fea_Train);
      
 
     oldfea = fea_Train*U_reduc;
